@@ -4,8 +4,7 @@
 
 <template>
   <div class="wrapper">
-    <h1>hola mundo</h1>
-    <p>IVAN</p>
+    <h1>App.vue</h1>
   </div>
 </template>
 
