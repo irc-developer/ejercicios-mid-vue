@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>CHARACTER SEARCH</h1>
 
     </div>
 </template>
