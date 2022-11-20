@@ -3,7 +3,7 @@ import type { RouterLink } from '@/router/link-routes';
 
     interface Props {
         title?:     string;
-        links?:     RouterLink[];
+        links:      RouterLink[];
         showIcon?:  boolean;
     }
 

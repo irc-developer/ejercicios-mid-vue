@@ -27,5 +27,7 @@ import { routerLink } from '@/router/link-routes';
     display:flex;
     flex-direction: column;
   }
+
+  
  
 </style>
