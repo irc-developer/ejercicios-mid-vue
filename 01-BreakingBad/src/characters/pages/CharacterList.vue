@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import CardList from '../components/CardList.vue';
+interface Props { title: string, visible:boolean}
+
+const props = defineProps<Props>();
+
 
 </script>
 
 <template>
-    <h1>Lista</h1>
-
+    <h2> {{ props.title }}</h2>
+    <CardList />
 </template>
 
 
