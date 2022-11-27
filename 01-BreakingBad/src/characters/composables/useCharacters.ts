@@ -13,7 +13,7 @@ const errorMessage = ref<string>("");
 
 export const useCharacters = () => {
 
-    onMounted(async () => {await loadCharacters()})
+    onMounted(async () => {await loadCharacters()});
 
     const loadCharacters = async () => {
         if ( characters.value!.length > 0 ) return;
