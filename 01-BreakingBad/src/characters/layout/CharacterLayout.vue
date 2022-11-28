@@ -19,7 +19,7 @@ const routeLink:RouterLink[] = characterRoute.children!
     <h1>Personajes</h1>
     <NavBar 
         :show-icon="true"
-        :links = 'routeLink'/>
+        :links = 'routeLink'/> 
     <RouterView/>
 </template>
 
