@@ -4,6 +4,7 @@ import App from './App.vue'
 import './assets/main.css'
 import router from './router';
 import { VueQueryPlugin } from '@tanstack/vue-query';
+import characterStore from '@/store/character.store';
 //tenemos que definir el middleware manualmente para usar el vuequeryplugin
 
 const app = createApp(App);
