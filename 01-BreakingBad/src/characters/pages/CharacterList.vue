@@ -24,6 +24,9 @@ useQuery(["characters"], getCharactersCacheFirst, {
     //Aquí además se puede extraer info según el estado de la pe4tición.
     onSuccess( data ) {
         characterStore.loadedCharacters( data );
+    },
+    onError( error ) {
+        //cualquier error: error de axios, error de internet, error de servidor, etc
     }
 });
 
@@ -34,6 +37,10 @@ characterStore
 <template>
     <!-- <h1 v-if="isLoading"> Loading...</h1> -->
     <h1 v-if="characterStore.characters.isLoading"> Loading...</h1>
+    <div v-else-if="characterStore.characters.hasError">
+        <h1>Error al cargar</h1>
+        <p>{{ characterStore.characters.errorMessage }}</p>
+    </div>
     <template v-else>
         <h2> {{ props.title }}</h2>
         <CardList :characters="characterStore.characters.list"/>
