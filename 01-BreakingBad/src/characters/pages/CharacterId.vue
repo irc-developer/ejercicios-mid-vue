@@ -1,46 +1,41 @@
-<script setup lang="ts">import { useRoute } from 'vue-router';
-import type { Character } from '../interfaces/characters';
-import characterStore from '../../store/character.store';
-import breakingBadApi from '@/api/breakingBadApi';
-import { useQuery } from '@tanstack/vue-query';
+<script setup lang="ts">
+import { watch, watchEffect} from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import useCharacter from '@/characters/composables/useCharacter';
+ 
+const router = useRouter();
+const route  = useRoute();
+const { id }    = route.params as { id: string };
+// aqií podríamos recuperar el pj por posición pero en vez de eso vamos a recurrir a las computadas
+const { isLoading, character, hasError, errorMessage} = useCharacter( id );
 
-const route = useRoute();
-const { id }  = route.params as { id: string};
+//watch sirve para definir qué queremos vigilar mientras que watchEffect permite vigilar las propiedades reactivas de dentro.
 
-const getCharacterCacheFirst = async (characterId:string) : Promise<Character> => {
-    if ( characterStore.checkIdInStore(characterId) ) {
-        return characterStore.ids.list[characterId];
-    }
+// watch(isLoading, () => console.error( {isLoading}))
 
-    const { data } = await breakingBadApi.get<Character[]>(`/characters/${ characterId }`);
-    return data[0];
-}
-
-const { data:character } = useQuery(
-    ['characters', id], // esto aquivale a meterle a la ruta el characterId como en la petición
-    () => getCharacterCacheFirst( id ),
-    {
-        onSuccess ( character ) {
-            characterStore.loadedCharacter( character );
-        }
-    }
-)
+watchEffect(() => {
+   if ( !isLoading.value && hasError.value ) {
+    router.replace('/characters');
+   }
+})
 
 </script>
 <template>
     <div>
-        <h1 v-if="!character" > Loading</h1>
-        <div v-else>
+    
+        <h1 v-if="isLoading" > Loading</h1>
+        <h1 v-else-if="hasError" > {{ errorMessage}}</h1>
+        <div v-else-if="character">
             <h1> {{ character.name }}</h1>
             <div class="character-container">
                 <img :src="character.img" :alt="character.name">
                 <ul>
-                    <li>Apodo: {{ character.nickname }}       </li>
-                    <li>Nació:  {{ character.birthday}}     </li>
-                    <li>Serie:  {{ character.category }}     </li>
-                    <li>Ocupación:  {{ character.occupation.join(', ') }}     </li>
-                    <li>Actor:  {{ character.portrayed }}     </li>
-                    <li>Actor:  {{ character.status }}     </li>
+                    <li>Apodo:      {{ character.nickname }}                </li>
+                    <li>Nació:      {{ character.birthday}}                 </li>
+                    <li>Serie:      {{ character.category }}                </li>
+                    <li>Ocupación:  {{ character.occupation.join(', ') }}   </li>
+                    <li>Actor:      {{ character.portrayed }}               </li>
+                    <li>Actor:      {{ character.status }}                  </li>
                 </ul>
             </div>
         </div>

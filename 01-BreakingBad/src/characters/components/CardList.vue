@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import breakingBadApi from "@/api/breakingBadApi";
 import type { Character } from "../interfaces/characters";
-import { useCharacters } from "../composables/useCharacters";
-import { useQuery } from "@tanstack/vue-query";
 import CharacterCard from "@/characters/components/CharacterCard.vue";
 
 //! 1.- Usando el suspens (está en fase beta)
