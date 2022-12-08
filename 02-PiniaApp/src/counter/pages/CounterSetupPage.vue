@@ -23,7 +23,7 @@ const {increment, incrementBy, $reset} = counterStore;
     <button @click="counterStore.incrementBy(2)">+2</button>
     <button @click="counterStore.incrementBy(5)">+5</button>
     
-    <!-- OJO AL MATOJO: función estándar de pinia que devuelve al estado inicial sin tener que definirlo -->
+    <!-- OJO AL MATOJO: función estándar de pinia que devuelve al estado inicial sin tener que definirlo, NO FUNCIONA SI LA DESESTRUCTURAMOS. -->
     <button @click="counterStore.$reset()">reset</button>
 
     <br>

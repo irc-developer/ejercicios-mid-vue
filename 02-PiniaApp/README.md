@@ -44,3 +44,11 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### MONTAR EL BACKEND FAKE
+
+```sh
+npm run backend-server
+```
+
+
