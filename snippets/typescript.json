@@ -1,0 +1,39 @@
+//! Para ejecutar esto tenemos que abrir con control-shift-p el comando "fragmento de código: configurar fragmentos de usuario"
+//escogemos el tipo del que sea este archivo y pegamos el contenido
+{
+    // Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+    "Print to console": {
+        "prefix": "pinia-store",
+        "body": [
+            "import { computed, ref } from 'vue';",
+            "import { defineStore } from 'pinia';",
+            "",
+            "",
+            "export const use${1:Counter}SetupStore = defineStore('${2:counter}', () => {",
+            "",
+            "   const ${2:counter} = ref<number>(0);",
+            "",
+            "   return {",
+            "      //state properties",
+            "      ${2:counter}, ",
+            "      //getters",
+            "      //squareCount: computed( () => count.value * count.value), ",
+            "   }",
+            "",
+            "})"
+        ],
+        "description": "store setup de pinia"
+    }
+}
