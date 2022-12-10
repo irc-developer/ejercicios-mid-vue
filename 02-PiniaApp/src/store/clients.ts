@@ -1,9 +1,9 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { Client } from '@/clients/interfaces/client';
 
 
-export const useClientsSetupStore = defineStore('clients', () => {
+export const useClientsStore = defineStore('clients', () => {
 
     const clients     = ref<Client[]>([]);
     const currentPage = ref<number>(1);
@@ -21,9 +21,15 @@ export const useClientsSetupStore = defineStore('clients', () => {
         },
         setPage( page: number ) {
             //? no es del todo necesario porque el store sabe que si el valor es el mismo no 
-            if ( currentPage.value === page ) return;
+            if ( currentPage.value === page || page <= 0 || page > totalPages.value ) return;
             currentPage.value = page;
-        }
+        },
+
+        //getters
+        //como el total de páginas cambia tenemos que retornar una propiedad computada.
+        totalPageNumbers: computed(
+          () => [...new Array( totalPages.value )].map( ( value, index ) => index + 1)
+        )
    }
 
 })

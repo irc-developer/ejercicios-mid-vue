@@ -4,11 +4,21 @@ import router from './router'
 import { createPinia } from 'pinia';
 
 import './assets/main.css'
+import { VueQueryPlugin } from '@tanstack/vue-query';
 
 const app = createApp(App)
 const pinia = createPinia();
 
 app.use(pinia);
 app.use(router)
+VueQueryPlugin.install( app, {
+    queryClientConfig: {
+        defaultOptions: {
+            queries: {
+                cacheTime: 1000*60,
+            }
+        }
+    }
+})
 
 app.mount('#app')
