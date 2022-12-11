@@ -1,32 +1,31 @@
 <script setup lang="ts">
-import ClientList from '@/clients/components/ClientList.vue';
-import LoadingModal from '@/shared/icons/components/LoadingModal.vue'; 
-import PaginationNumbers from '@/clients/components/PaginationNumbers.vue';
-import useClients from '@/clients/composables/useClients';
+import ClientList from "@/clients/components/ClientList.vue";
+import LoadingModal from "@/shared/icons/components/LoadingModal.vue";
+import PaginationNumbers from "@/clients/components/PaginationNumbers.vue";
+import useClients from "@/clients/composables/useClients";
 
-const { isLoading, clients, getPage, totalPages, totalPageNumbers, currentPage} = useClients();
-
-const emit = defineEmits<{
-  (e: 'getPage', id: number): void
-}>()
-
+const {
+    isLoading,
+    clients,
+    getPage,
+    totalPages,
+    currentPage,
+} = useClients();
 </script>
 
 <template>
     <div>
         <h1>Lista de clientes</h1>
-        <ClientList :clients="clients"/>
-        
-        <PaginationNumbers 
-            
-        
-        />        
+        <ClientList :clients="clients" />
 
-        <LoadingModal v-if="isLoading"/>
+        <PaginationNumbers 
+            :current-page="currentPage"
+            :total-pages="totalPages"
+            @page-changed="getPage"
+        />
+
+        <LoadingModal v-if="isLoading" />
     </div>
 </template>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>
