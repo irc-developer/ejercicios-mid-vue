@@ -17,8 +17,9 @@ const useClient = ( id:number ) => {
         () => getClient(id)
     );
 
+    //Es importante tener claro que ahora mismo, con la asignación client.value = data.value se considera como no mutable y no nos dejaría cambiar los valores en la vista, para prevenirlo tenemos que desestructurar el valor para poder crear un nuevo puntero o directamente obviar el watch y usar el onSuccess del tanstack pero esto provocaría que perdiesemos la reactividad.
     watch(data, () => {
-        if ( data.value ) client.value = data.value;
+        if ( data.value ) client.value = { ...data.value };
     }, { immediate:true } );
 
     return {

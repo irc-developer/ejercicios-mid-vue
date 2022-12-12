@@ -6,7 +6,7 @@ import Counter1Value from '@/counter/pages/Counter1Value.vue'
 import CounterSetupPage from '@/counter/pages/CounterSetupPage.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_API_URL),
   routes: [
     {
       path: '/',
